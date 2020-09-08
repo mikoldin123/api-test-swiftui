@@ -11,7 +11,9 @@ import Combine
 
 struct ContentView: View {
     var body: some View {
-        CountryListView()
+        NavigationView {
+            CountryListView().navigationBarTitle("Country List")
+        }.padding(.vertical)
     }
 }
 

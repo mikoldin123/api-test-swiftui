@@ -9,16 +9,16 @@
 import Foundation
 import Combine
 
-enum CountryAPI {
-    case allCountries
+enum CasesAPI {
+    case summary
 }
 
-extension CountryAPI: NetworkService {
+extension CasesAPI: NetworkService {
     var baseURL: String {
         return API.baseURL
     }
     
     var endpoint: String {
-        return "countries"
+        return "summary"
     }
 }

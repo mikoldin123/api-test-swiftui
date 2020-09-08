@@ -26,6 +26,8 @@ protocol NetworkService {
     var endpoint: String { get }
     var headers: [String: Any]? { get }
     
+    var query: [String: String]? { get }
+    
     func request<T: Codable>() -> AnyPublisher<T, Error>
 }
 
@@ -34,16 +36,28 @@ extension NetworkService {
         return nil
     }
     
+    var query: [String: String]? {
+        return nil
+    }
+    
     var client: NetworkAPI {
         return NetworkAPI()
     }
     
     func request<T: Codable>() -> AnyPublisher<T, Error> {
-        guard let url = URL(string: baseURL + endpoint) else {
+        var component = URLComponents(string: baseURL + endpoint)
+        
+        if let query = self.query {
+            component?.queryItems = query.map({ (key, value) -> URLQueryItem in
+                return URLQueryItem(name: key, value: value)
+            })
+        }
+        
+        guard let requestUrl = component?.url else {
             fatalError("Invalid URL")
         }
         
-        let request = URLRequest(url: url)
+        let request = URLRequest(url: requestUrl)
         
         return client.run(request).map(\.value).eraseToAnyPublisher()
     }
