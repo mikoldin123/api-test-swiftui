@@ -30,10 +30,32 @@ struct Country: Identifiable, Codable {
     let continent: String
     let population: Int
     
+    var chartData: [ChartData] {
+        return [
+            .init(id: 0, percent: percent(self.active), value: Double(self.active), name: "ACTIVE", color: .yellow),
+            .init(id: 1, percent: percent(self.recovered), value: Double(self.recovered), name: "RECOVERED", color: .green),
+            .init(id: 2, percent: percent(self.deaths), value: Double(self.deaths), name: "DEATHS", color: .red)
+        ]
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name = "country"
         case info = "countryInfo"
         case updated, cases, deaths, recovered, active, critical, todayCases, todayDeaths, todayRecovered, continent, population
+    }
+    
+    
+    private func percent(_ value: Int) -> Double {
+        
+        let val = Double(value)/Double(self.cases)
+        
+        let percent = Double(val * 100.0)
+        
+        /*print("percent --- \(percent)")
+        
+        print("percent --- \(percent * 100)")*/
+        
+        return percent
     }
 }
 

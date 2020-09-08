@@ -10,23 +10,62 @@ import SwiftUI
 
 struct SummaryView: View {
     var country: Country
-    
-    init(country: Country) {
-        self.country = country
-    }
-    
+ 
     var body: some View {
         VStack {
-            Path { path in
+            VStack(alignment: .leading, spacing: 4.0) {
+                HStack {
+                    Spacer()
+                }
+                Text("TOTAL CASES: \(country.cases)")
+                Text("RECOVERED: \(country.recovered)")
+                Text("ACTIVE: \(country.active)")
+                Text("DEATHS: \(country.deaths)")
+            }.padding(.leading, 16.0)
+            
+            GeometryReader { geo in
+                ZStack {
+                    ForEach(0..<self.country.chartData.count, id: \.self) { index in
+                        PieChart(array: self.country.chartData, center: CGPoint(x: geo.frame(in: .global).width / 2, y: geo.frame(in: .global).height / 2), index: index)
+                    }
+                }
+            }
+            .frame(height: 360)
+            .padding(.top, 20).clipShape(Circle())
+            
+            VStack {
                 
-                path.move(to: CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2))
-                
-                path.addArc(center: CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2), radius: 180, startAngle: .zero, endAngle: .init(degrees: 90), clockwise: false)
-            }.fill(Color.green)
+                ForEach(self.country.chartData) { item in
+                    HStack() {
+                        Text(item.name).frame(width: 100.0)
+                        
+                        GeometryReader { geo in
+                            HStack {
+                                Spacer(minLength: 0)
+                                Rectangle()
+                                    .fill(item.color)
+                                    .frame(width: self.getWidth(geo.frame(in: .global).width - 120.0, forValue: CGFloat(item.percent)), height: 10)
+                                
+                                Text("\(item.percent.roundTo(decimalPlaces: 1)) %")
+                                    .fontWeight(.bold).padding(.leading, 16.0)
+                            }
+                            
+                        }
+                    }.padding(.init(top: 0, leading: 0, bottom: 0.0, trailing: 0))
+                }
+            }
+            .padding()
+            
+            Spacer()
         }
-        
+    }
+    
+    func getWidth(_ width: CGFloat, forValue value: CGFloat) -> CGFloat {
+        return (value / 100) * width
     }
 }
+
+
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {

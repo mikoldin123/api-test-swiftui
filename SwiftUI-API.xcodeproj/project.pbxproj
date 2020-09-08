@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE3BABB625076A4B002EAF6A /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3BABB525076A4B002EAF6A /* PieChart.swift */; };
+		FE3BABB825076A92002EAF6A /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3BABB725076A92002EAF6A /* ChartData.swift */; };
 		FEA5F52B2505E340007DE315 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5F52A2505E340007DE315 /* AppDelegate.swift */; };
 		FEA5F52D2505E340007DE315 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5F52C2505E340007DE315 /* SceneDelegate.swift */; };
 		FEA5F52F2505E340007DE315 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5F52E2505E340007DE315 /* ContentView.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FE3BABB525076A4B002EAF6A /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
+		FE3BABB725076A92002EAF6A /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		FEA5F5272505E340007DE315 /* SwiftUI-API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI-API.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEA5F52A2505E340007DE315 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FEA5F52C2505E340007DE315 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE3BABB425076A38002EAF6A /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				FE3BABB525076A4B002EAF6A /* PieChart.swift */,
+			);
+			path = Subview;
+			sourceTree = "<group>";
+		};
 		FEA5F51E2505E340007DE315 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +84,7 @@
 		FEA5F5292505E340007DE315 /* SwiftUI-API */ = {
 			isa = PBXGroup;
 			children = (
+				FE3BABB425076A38002EAF6A /* Subview */,
 				FEA5F5502505E980007DE315 /* API */,
 				FEA5F54B2505E5F0007DE315 /* Network */,
 				FEA5F5482505E4C4007DE315 /* Observables */,
@@ -127,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				FEA5F5492505E513007DE315 /* Country.swift */,
+				FE3BABB725076A92002EAF6A /* ChartData.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -243,8 +257,10 @@
 				FEA5F52D2505E340007DE315 /* SceneDelegate.swift in Sources */,
 				FEA5F54A2505E513007DE315 /* Country.swift in Sources */,
 				FEAA3F4E250607FB00B18DD0 /* SummaryView.swift in Sources */,
+				FE3BABB625076A4B002EAF6A /* PieChart.swift in Sources */,
 				FEA5F52F2505E340007DE315 /* ContentView.swift in Sources */,
 				FEA5F54F2505E63F007DE315 /* NetworkAPI.swift in Sources */,
+				FE3BABB825076A92002EAF6A /* ChartData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
