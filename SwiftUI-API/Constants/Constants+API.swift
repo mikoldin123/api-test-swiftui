@@ -9,5 +9,5 @@
 import Foundation
 
 struct API {
-    static var baseURL = "https://api.covid19api.com/"
+    static var baseURL = "https://corona.lmao.ninja/v2/"
 }

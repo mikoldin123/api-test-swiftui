@@ -34,7 +34,7 @@ struct CountryListCell: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4.0) {
                 Text(country.name).font(.headline).lineLimit(3)
-                Text(country.code ?? "").font(.subheadline)
+                Text(country.info.code).font(.subheadline)
             }
         }
     }

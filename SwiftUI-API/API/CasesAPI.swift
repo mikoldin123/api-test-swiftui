@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 enum CasesAPI {
-    case summary
+    case countries
 }
 
 extension CasesAPI: NetworkService {
@@ -19,6 +19,6 @@ extension CasesAPI: NetworkService {
     }
     
     var endpoint: String {
-        return "summary"
+        return "countries"
     }
 }

@@ -16,15 +16,20 @@ struct SummaryView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4.0) {
-            Text(country.name).font(.headline).lineLimit(3)
-            Text(country.code ?? "").font(.subheadline)
-        }.padding(.top)
+        VStack {
+            Path { path in
+                
+                path.move(to: CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2))
+                
+                path.addArc(center: CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2), radius: 180, startAngle: .zero, endAngle: .init(degrees: 90), clockwise: false)
+            }.fill(Color.green)
+        }
+        
     }
 }
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryView(country: Country(name: "Country", slug: "slug", iso2: "iso2", code: nil, lat: nil, lon: nil, confirmed: nil, deaths: nil, recovered: nil, active: nil, date: nil, locationId: nil))
+        SummaryView(country: Country(name: "Philippines", info: CountryInfo(id: 0, iso2: "PH", iso3: "PHL", lat: 0, long: 0, flag: ""), updated: 0, cases: 0, deaths: 0, recovered: 0, active: 0, critical: 0, todayCases: 0, todayDeaths: 0, todayRecovered: 0, continent: "Asia", population: 1))
     }
 }

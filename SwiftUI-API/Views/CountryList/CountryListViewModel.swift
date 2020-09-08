@@ -17,7 +17,7 @@ class CountryListViewModel: ObservableObject {
     
     func fetchCountries() {
         cancelationToken = CasesAPI
-            .summary
+            .countries
             .request()
             .mapError({ (error) -> Error in
                 print(error)
@@ -25,9 +25,9 @@ class CountryListViewModel: ObservableObject {
             })
             .sink(receiveCompletion: { _ in
                 print("DONE")
-            }) { [weak self] (summary: Summary) in
+            }) { [weak self] (countries: [Country]) in
                 guard let this = self else { return }
-                this.countries = summary.countries.sorted(by: { $0.name < $1.name })
+                this.countries = countries.sorted(by: { $0.name < $1.name })
             }
     }
 }
