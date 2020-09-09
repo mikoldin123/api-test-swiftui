@@ -17,10 +17,11 @@ struct SummaryView: View {
                 HStack {
                     Spacer()
                 }
-                Text("TOTAL CASES: \(country.cases)")
-                Text("RECOVERED: \(country.recovered)")
-                Text("ACTIVE: \(country.active)")
-                Text("DEATHS: \(country.deaths)")
+                CasesSummaryView(title: "TOTAL CASES:", value: "\(country.cases)")
+                CasesSummaryView(title: "RECOVERED:", value: "\(country.recovered)")
+                CasesSummaryView(title: "ACTIVE:", value: "\(country.active)")
+                CasesSummaryView(title: "DEATHS:", value: "\(country.deaths)")
+                
             }.padding(.leading, 16.0)
             
             GeometryReader { geo in
@@ -65,7 +66,19 @@ struct SummaryView: View {
     }
 }
 
-
+struct CasesSummaryView: View {
+    var title: String
+    var value: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text(title).font(Font.headline)
+                Text(value).font(Font.subheadline)
+            }
+        }
+    }
+}
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {

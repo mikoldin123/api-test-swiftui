@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import KingfisherSwiftUI
 
 struct CountryListView: View {
     
@@ -32,9 +33,17 @@ struct CountryListCell: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4.0) {
-                Text(country.name).font(.headline).lineLimit(3)
-                Text(country.info.code).font(.subheadline)
+            HStack {
+                KFImage(URL(string: country.info.flag))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 50)
+                    .padding(.all, 8.0)
+                
+                VStack(alignment: .leading, spacing: 4.0) {
+                    Text(country.name).font(.headline).lineLimit(3)
+                    Text(country.info.code).font(.subheadline)
+                }
             }
         }
     }
