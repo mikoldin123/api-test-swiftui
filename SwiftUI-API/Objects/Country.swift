@@ -9,7 +9,8 @@
 import Foundation
 import SwiftUI
 
-struct Country: Identifiable, Codable {
+struct Country: Identifiable, Codable, Hashable {
+    
     let id = UUID()
     
     let name: String
@@ -44,6 +45,9 @@ struct Country: Identifiable, Codable {
         case updated, cases, deaths, recovered, active, critical, todayCases, todayDeaths, todayRecovered, continent, population
     }
     
+    static func == (lhs: Country, rhs: Country) -> Bool {
+        return lhs.id == rhs.id
+    }
     
     private func percent(_ value: Int) -> Double {
         
@@ -59,7 +63,7 @@ struct Country: Identifiable, Codable {
     }
 }
 
-struct CountryInfo: Codable {
+struct CountryInfo: Codable, Hashable {
     
     let id: Int?
     
@@ -86,5 +90,9 @@ struct CountryInfo: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case iso2, iso3, lat, long, flag
+    }
+    
+    static func == (lhs: CountryInfo, rhs: CountryInfo) -> Bool {
+        return lhs.id == rhs.id
     }
 }

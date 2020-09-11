@@ -15,14 +15,56 @@ struct CountryListView: View {
     
     let test: [Country] = []
     
+    let isSearching: Bool = false
+    
     init() {
         model.fetchCountries()
     }
     
     var body: some View {
-        List(model.countries) { country in
+        ViewBuilder.buildBlock(
+            isSearching ?
+                ViewBuilder.buildEither(first: SearchingView(countries: model.countries)):
+                ViewBuilder.buildEither(second: DisplayView(sectioned: model.sectioned))
+        )
+    }
+}
+
+struct SearchingView: View {
+    
+    var countries: [Country]
+    
+    var body: some View {
+        List(countries) { country in
             NavigationLink(destination: SummaryView(country: country).navigationBarTitle(country.name)) {
                 CountryListCell(country: country)
+            }
+        }.listStyle(GroupedListStyle())
+    }
+}
+
+struct DisplayView: View {
+    var sectioned: [String: [Country]]
+    
+    var body: some View {
+        List {
+            ForEach(sectioned.keys.sorted(), id: \.self) { key in
+                CountrySectionHeaderCell(title: key, array: self.sectioned[key] ?? [])
+            }
+        }.listStyle(GroupedListStyle())
+    }
+}
+
+struct CountrySectionHeaderCell: View {
+    var title: String
+    var array: [Country]
+    
+    var body: some View {
+        Section(header: Text(title).font(Font.headline)) {
+            ForEach(array, id: \.self) { country in
+                NavigationLink(destination: SummaryView(country: country).navigationBarTitle(country.name)) {
+                    CountryListCell(country: country)
+                }
             }
         }
     }

@@ -12,6 +12,8 @@ import Combine
 class CountryListViewModel: ObservableObject {
     
     @Published var countries: [Country] = []
+    @Published var sectioned: [String: [Country]] = [:]
+    @Published var isSearching: Bool = true
     
     var cancelationToken: AnyCancellable?
     
@@ -27,7 +29,18 @@ class CountryListViewModel: ObservableObject {
                 print("DONE")
             }) { [weak self] (countries: [Country]) in
                 guard let this = self else { return }
-                this.countries = countries.sorted(by: { $0.name < $1.name })
+                /*this.countries = Dictionary(grouping: countries.sorted(by: { $0.name < $1.name }), by: { $0.continent })*/
+                let sorted = countries.sorted(by: { $0.name < $1.name })
+                
+                let dict = Dictionary<String, [Country]>(grouping: sorted) { (country: Country) in
+                    if country.continent.isEmpty {
+                        return "Others"
+                    }
+                    return country.continent
+                }
+                
+                this.countries = sorted
+                this.sectioned = dict
             }
     }
 }
